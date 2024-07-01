@@ -20,7 +20,20 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Event'
+                  $ref: "#/components/schemas/Event"
+    post:
+      tags:
+        - events
+      operationId: createEvent
+      description: |
+        Create New Events Data.
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Id"
   /events/{eventId}:
     get:
       tags:
@@ -28,9 +41,9 @@ paths:
       operationId: findEvent
       description: |
         Return Event Data.
-      parameters: # リクエストパラメータ
+      parameters:
         - name: eventId
-          in: path # パラメータをパス内に含める
+          in: path
           description: Event ID
           required: true
           schema:
@@ -43,19 +56,57 @@ paths:
             application/json:
               schema:
                 type: object
-                $ref: '#/components/schemas/Event'
+                $ref: "#/components/schemas/Event"
+    put:
+      tags:
+        - events
+      operationId: updateEvent
+      description: |
+        Update Event Data.
+      parameters:
+        - name: eventId
+          in: path
+          description: Event ID
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Updated
+    delete:
+      tags:
+        - events
+      operationId: deleteEvent
+      description: |
+        Delete Event Data.
+      parameters:
+        - name: eventId
+          in: path
+          description: Event ID
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Deleted
+
 components:
   schemas:
     Event:
       allOf:
         - $ref: "#/components/schemas/NewEvent"
-        - type: object
-          required:
-            - id
-          properties:
-            id:
-              type: string
-              format: uuid
+        - $ref: "#/components/schemas/Id"
+
+    Id:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          format: uuid
 
     NewEvent:
       type: object
