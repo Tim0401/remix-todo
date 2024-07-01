@@ -1,0 +1,68 @@
+openapi: "3.0.3"
+info:
+  title: Event API
+  version: "1.0"
+servers:
+  - url: http://localhost:8080
+paths:
+  /events:
+    get:
+      tags:
+        - events
+      description: |
+        Return Events Data.
+      operationId: findEvents
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+  /events/{eventId}:
+    get:
+      tags:
+        - events
+      description: |
+        Return Event Data.
+      operationId: findEvent
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Event'
+components:
+  schemas:
+    Event:
+      allOf:
+        - $ref: "#/components/schemas/NewEvent"
+        - type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+              format: uuid
+
+    NewEvent:
+      type: object
+      required:
+        - name
+        - description
+        - startAt
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        startAt:
+          type: string
+          format: date-time
+        endAt:
+          type: string
+          format: date-time
