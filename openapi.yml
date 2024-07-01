@@ -9,9 +9,9 @@ paths:
     get:
       tags:
         - events
+      operationId: findEvents
       description: |
         Return Events Data.
-      operationId: findEvents
       responses:
         "200":
           description: OK
@@ -25,9 +25,17 @@ paths:
     get:
       tags:
         - events
+      operationId: findEvent
       description: |
         Return Event Data.
-      operationId: findEvent
+      parameters: # リクエストパラメータ
+        - name: eventId
+          in: path # パラメータをパス内に含める
+          description: Event ID
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
         "200":
           description: OK
