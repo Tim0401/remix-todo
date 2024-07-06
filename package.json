@@ -2,7 +2,8 @@
   "scripts": {
     "mock": "prism mock openapi.yml -p 8080"
   },
-  "dependencies": {
-    "@stoplight/prism-cli": "^5.8.1"
+  "devDependencies": {
+    "@stoplight/prism-cli": "^5.8.1",
+    "@marp-team/marp-cli": "^3.4.0"
   }
 }

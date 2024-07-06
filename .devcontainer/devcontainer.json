@@ -15,7 +15,8 @@
 		"vscode": {
 			"extensions": [
 				"42Crunch.vscode-openapi",
-				"bradlc.vscode-tailwindcss"
+				"bradlc.vscode-tailwindcss",
+				"marp-team.marp-vscode"
 			]
 		}
 	}
